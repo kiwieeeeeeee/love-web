@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Do You Love Me?</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #ffccd5, #ffe6e6);
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      color: #b30000;
+    }
+
+    h1, h2 {
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      margin-top: 80px;
+      font-size: 3em;
+    }
+
+    h2 {
+      margin-top: 15px;
+      font-size: 1.3em;
+    }
+
+    button {
+      padding: 15px 30px;
+      margin: 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 10;
+ position: absolute;
+      border: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #yesBtn {
+      left: 40%;
+      top: 55%;
+    }
+
+    #noBtn {
+      left: 55%;
+      top: 55%;
+      background: #6c757d;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .gift-container {
+      margin-top: 40px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .gift {
+      display: inline-block;
+      margin: 20px;
+  padding: 30px;
+      background: #fff;
+      border: 3px solid #b30000;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 1.3em;
+      z-index: 10;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gift:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      color: #ff4d6d;
+      font-size: 25px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 20px;
+  animation: fall 7s linear infinite;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+
+    .moon {
+      position: fixed;
+      top: 40px;
+      right: 60px;
+      width: 120px;
+      height: 120px;
+      background: #fff8dc;
+      border-radius: 50%;
+      box-shadow: 0 0 40px #fff8dc;
+      z-index: 1;
+    }
+
+    #finalScreen {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      color: #ffe6e6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      z-index: 999;
+    }
+
+ #finalText {
+      max-width: 700px;
+      font-size: 1.4em;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    #qrSection {
+      margin-top: 20px;
+    }
+
+    #qrSection img {
+      width: 180px;
+      height: 180px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Music: put your mp3 in same folder and change the file name here -->
+  <audio autoplay loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="moon"></div>
+
+  <h1>Do you love me? ❤️🎄</h1>
+  <h2>Be honest, but also… choose wisely 😏</h2>
+ <button id="yesBtn">Yes, obviously ❤️</button>
+  <button id="noBtn">No (wrong choice) ❄️</button>
+
+  <div id="gifts" class="hidden gift-container">
+    <h2>Since you said YES, you get gifts! 🎁💘</h2>
+
+    <div class="gift" id="gift1">🎁 Box 1</div>
+    <div class="gift" id="gift2">🎁 Box 2</div>
+    <div class="gift" id="gift3">🎁 Box 3</div>
+  </div>
+
+  <!-- Kutto Meter Section -->
+  <div id="kuttoMeterSection" class="hidden" style="margin-top:40px;">
+    <h2>Before you continue… fill the Kutto Meter 😼💗</h2>
+    <p>Press SPACEBAR really fast until it reaches 1000!</p>
+
+    <div style="width:60%; margin:auto; background:#ffe6ea; border-radius:20px; height:30px; border:2px solid #ff4d6d;">
+      <div id="kuttoBar" style="height:100%; width:0%; background:#ff4d6d; border-radius:20px;"></div>
+    </div>
+
+    <p id="kuttoCount" style="font-size:1.3em; margin-top:10px;">0 / 1000</p>
+  </div>
+
+  <!-- Final Screen -->
+  <div id="finalScreen" class="hidden">
+    <div id="finalText">
+      Hey love, you opened all the gifts 🎁  
+      That means you’re officially stuck with me now.  
+      Thank you for loving me, choosing me, and saying  
+      <br><br>
+      <strong>“Isn’t the moon beautiful?” 🌙</strong>  
+      <br>
+      That night, the sky was pretty… but you were prettier.  
+      I’m so, so grateful that in this huge universe,  
+      somehow, it’s you and me, here, like this. 
+ <br><br>
+      I love you more than Valentine chocolates,  
+      more than Christmas lights,  
+      and more than words can ever say. ❤️
+    </div>
+
+    <div id="qrSection">
+      <h2>Scan this later to visit this page again 💌</h2>
+      <img src="qr-code.png" alt="QR Code to this website">
+      <p style="margin-top:10px; font-size:0.9em;">
+        (I made this just for you, so you can’t escape it 😈)
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const gifts = document.getElementById('gifts');
+    const gift1 = document.getElementById('gift1');
+    const gift2 = document.getElementById('gift2');
+    const gift3 = document.getElementById('gift3');
+    const finalScreen = document.getElementById('finalScreen');
+
+    let openedGifts = 0;
+    let kuttoCount = 0;
+    let kuttoActive = false;
+
+    yesBtn.onclick = () => {
+      gifts.classList.remove('hidden');
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+    };
+
+ // No button runs away
+    noBtn.addEventListener("mouseover", () => {
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+      const maxX = window.innerWidth - btnWidth - 10;
+      const maxY = window.innerHeight - btnHeight - 10;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    // Love letters with your inside jokes
+    gift1.onclick = () => {
+      alert("My love,\n\nEvery moment with you feels like a warm hug on a winter night. And honestly, nothing beats the way you look in that green sparkly sweater — it lives in my mind rent free. You make everything brighter, softer, and kutto in the best way possible. Thank you for being the sweetest part of my days. ❤️");
+      checkAllGifts();
+    };
+
+    gift2.onclick = () => {
+      alert("Okay listen… I loveee you SO MUCH.\n\nLike more than hot chocolate on a freezing night, more than fairy lights on Christmas, more than every cheesy love song ever written. I love your face, your laugh, your brain, your heart — literally everything.\n\nAnd don’t even get me started on kissing you… because I could kiss you a lottttttttttttttttttttttttt and still not be done. You’re my kutto boy and my favourite person ever. ❤️🎄");
+      checkAllGifts();
+    };
+
+    gift3.onclick = () => {
+      alert("I’m so grateful for you.\n\nFor your kindness, your softness, your chaos, your jokes, your green sparkly sweater moments, and the way you let me kiss you endlessly without complaining (okay maybe a little complaining but still cute).\n\nThank you for choosing me, staying with me, and loving me the way you do. You’re my favourite human in this whole universe. 🌙❤️");
+      checkAllGifts();
+    };
+
+    function checkAllGifts() {
+      openedGifts++;
+      if (openedGifts >= 3) {
+        setTimeout(() => {
+  document.getElementById("kuttoMeterSection").classList.remove("hidden");
+          kuttoActive = true;
+        }, 500);
+      }
+    }
+
+    // Kutto Meter logic
+    document.addEventListener("keydown", function(e) {
+      if (!kuttoActive) return;
+
+      if (e.code === "Space") {
+        e.preventDefault();
+        kuttoCount++;
+        let percent = (kuttoCount / 1000) * 100;
+        if (percent > 100) percent = 100;
+
+        document.getElementById("kuttoBar").style.width = percent + "%";
+        document.getElementById("kuttoCount").innerText = `${kuttoCount} / 1000`;
+
+        if (kuttoCount >= 1000) {
+          kuttoActive = false;
+          setTimeout(() => {
+            alert("YOU FILLED THE KUTTO METER 😼💗\nYou are officially my kutto forever.");
+            finalScreen.classList.remove('hidden');
+          }, 300);
+        }
+      }
+    });
+
+    // Floating hearts generator
+    setInterval(() => {
+      let heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+ setTimeout(() => heart.remove(), 7000);
+    }, 500);
+
+    // Snowflakes generator
+    setInterval(() => {
+      let snow = document.createElement("div");
+      snow.classList.add("snowflake");
+      snow.innerHTML = "❄️";
+      snow.style.left = Math.random() * 100 + "vw";
+      snow.style.animationDuration = (5 + Math.random() * 5) + "s";
+      document.body.appendChild(snow);
+      setTimeout(() => snow.remove(), 8000);
+    }, 400);
+  </script>
+
+</body>
+</html>
